@@ -63,7 +63,8 @@ public abstract class BaseSpotlessWrapperMojo extends AbstractMojo {
                 plugin(
                         groupId("com.diffplug.spotless"),
                         artifactId("spotless-maven-plugin"),
-                        version("2.21.0")),
+                        version("2.21.0")
+                ),
                 goal,
                 configuration(
                         element("java",
