@@ -1,9 +1,8 @@
 package by.mark.spotless.wrapper;
 
-import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 
-@Mojo(name = "apply", defaultPhase = LifecyclePhase.TEST)
+@Mojo(name = "apply")
 public class SpotlessApplyWrapperMojo extends BaseSpotlessWrapperMojo {
 
     @Override
