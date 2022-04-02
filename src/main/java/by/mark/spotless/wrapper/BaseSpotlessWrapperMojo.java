@@ -7,6 +7,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.project.MavenProject;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,15 +34,15 @@ public abstract class BaseSpotlessWrapperMojo extends AbstractMojo {
     private BuildPluginManager pluginManager;
 
     @Override
-    public void execute() {
+    public void execute() throws MojoExecutionException {
         try {
             executeWithFileCopy();
-        } catch (Exception e) {
-            getLog().error("Can not execute goal: " + getSpotlessGoal(), e);
+        } catch (IOException e) {
+            throw new MojoExecutionException("Something went wrong...", e);
         }
     }
 
-    private void executeWithFileCopy() throws Exception {
+    private void executeWithFileCopy() throws MojoExecutionException, IOException {
         Path formatFileTempCopy = null;
 
         try (InputStream is = requireNonNull(this.getClass().getClassLoader().getResourceAsStream("eclipse-formatter.xml"))) {
